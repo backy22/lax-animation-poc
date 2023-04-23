@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { gsap } from "gsap";
+import { PixiPlugin } from "gsap/PixiPlugin.js";
+import { MotionPathPlugin } from "gsap/MotionPathPlugin.js";
+import { useEffect } from 'react';
+import lax from 'lax.js'
 
-function App() {
+const App = () => {
+  useEffect(() => {
+    gsap.registerPlugin(PixiPlugin, MotionPathPlugin);
+    lax.init()
+  })
+
+  const animation = () => {
+    gsap.to(".box", { scale: 10 })
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="box"></div>
+        <button onClick={animation}>Click</button>
       </header>
+      <div className="lax lax_preset_fadeIn:50:100 lax_preset_spin"></div>
     </div>
   );
 }
